@@ -4,12 +4,6 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,900;1,300&display=swap"
-			rel="stylesheet"
-		/>
 		<link rel="stylesheet" href="./style.css" />
 		<script src="./script.js" defer></script>
 		<title>JavaScript Calculator</title>
@@ -18,15 +12,15 @@
 		<main class="container">
 			<div class="calculator">
 				<section class="display-screen" id="display">
-					<div class="previousValue previousOperand"></div>
-					<div class="currentValue currentOperand"></div>
+					<div class="previousValue"></div>
+					<div class="currentValue"></div>
 				</section>
 				<section class="buttons">
 					<div>
 						<button id="delete">DEL</button>
-						<button class="btn-operator" id="%">&percnt;</button>
-						<button class="btn-operator" id="/">&divide;</button>
-						<button class="btn-operator" id="*">&times;</button>
+						<button class="btn-operator" id="%">%</button>
+						<button class="btn-operator" id="/">/</button>
+						<button class="btn-operator" id="*">*</button>
 					</div>
 					<div>
 						<button class="btn-number" id="7">7</button>
@@ -46,7 +40,6 @@
 						<button class="btn-number" id="3">3</button>
 						<button class="btn-number" id=".">.</button>
 					</div>
-
 					<div>
 						<button id="clear">C</button>
 						<button class="btn-number" id="0">0</button>

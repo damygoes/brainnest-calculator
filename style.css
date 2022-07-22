@@ -20,10 +20,11 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	border: 1px solid red;
 }
 
 .calculator {
-	height: 50%;
+	height: 80%;
 	width: auto;
 	padding: 1.2rem;
 	border-radius: 10px;

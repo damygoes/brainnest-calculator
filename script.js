@@ -25,6 +25,8 @@ const deleteInput = () => {
 //the appendNumber function takes in a number as a paramater (this is supplied by the button.textContent from the numberButtons) and displays it on the screen
 const appendNumber = (number) => {
 	if (number === "." && currentValue.includes(".")) return; //here we make sure the user can only type the "." operator only once.
+	if (number === "0" && currentValue === "0") return;
+
 	currentValue = currentValue.toString() + number.toString(); //we set the current value (current user input) to string because we want to be able to concatenate all the numbers that the user types in and not treat them as numbers (which might add them up or just allow single number input)
 };
 

@@ -68,12 +68,12 @@ const operate = () => {
 		case "%":
 			console.log(previous, current);
 			result = previous / 100;
-			console.log(result);
+			// console.log(result);
 			break;
 		default:
 			return;
 	}
-	currentValue = result; //here we set the current value (to be displayed at the bottom of the screen) to the result of the computation
+	currentValue = Math.round(result * 100) / 100; //here we set the current value (to be displayed at the bottom of the screen) to the result of the computation fixed to 2 decimal point
 	operation = undefined; // here we set operation to undefined
 	previousValue = ""; // here we set the previous value (the one on top of the display) to empty
 };
@@ -114,4 +114,51 @@ clearButton.addEventListener("click", (button) => {
 deleteButton.addEventListener("click", (button) => {
 	deleteInput();
 	updateDisplay();
+});
+
+// ########################################################
+// #############  KEYBOARD EVENTS ####################
+// ########################################################
+
+document.addEventListener("keydown", (e) => {
+	// console.log(e.key);
+	numbersArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+	operationParametersArray = ["+", "-", "*", "/", "%"];
+	equalsSymbol = "Enter";
+	deleteOne = "Backspace";
+	clearAll = "Escape";
+	for (let i = 0; i < numbersArray.length; i++) {
+		if (e.key === numbersArray[i]) {
+			// console.log(e.key);
+			let number = e.key;
+			appendNumber(number);
+			updateDisplay();
+		}
+	}
+	for (let i = 0; i < operationParametersArray.length; i++) {
+		if (e.key === operationParametersArray[i]) {
+			// console.log(e.key);
+			let number = e.key;
+			let operation_parameter = e.key;
+			appendNumber(number);
+			chooseOperation(operation_parameter);
+			updateDisplay();
+		}
+	}
+	if (e.key === equalsSymbol) {
+		operate();
+		updateDisplay();
+	}
+	if (e.key === deleteOne) {
+		deleteInput();
+		updateDisplay();
+	}
+	if (e.key === deleteOne) {
+		deleteInput();
+		updateDisplay();
+	}
+	if (e.key === clearAll) {
+		clear();
+		updateDisplay();
+	}
 });

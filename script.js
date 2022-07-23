@@ -44,10 +44,13 @@ const chooseOperation = (operation_parameter) => {
 
 // the operate function performs the actual mathematical computations
 const operate = () => {
-	let result; //create a variable to store the result of our computation
-	const previous = parseFloat(previousValue); //the previous value inputted by the user (the one on top of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
-	const current = parseFloat(currentValue); //the current value inputted by the user (the one on the bottom of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
+	let result;
+	let previous = parseFloat(previousValue);
+	let current = currentValue;
+
+	// const current = currentValue; //the current value inputted by the user (the one on the bottom of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
 	// console.log(`previous: ${previous}`, `current: ${current}`);
+
 	if (!previous || (!current && operation != "%")) return; //if the user does not enter a previous value, or a current value, the code/calculator will not run. However, if the user enters a previous value and no current value but the operation symbol is "%", the code will run.
 	switch (operation) {
 		case "+":
@@ -59,18 +62,24 @@ const operate = () => {
 		case "/":
 			if (current == 0) {
 				result = "Error!";
-				clear();
+				currentValue = result;
+				console.log(currentValue);
+				previousValue = "";
+				updateDisplay();
+
 				return;
-			} // here we make sure that the user gets an Error if they try to didvide a number by 0, but not break the code
-			result = previous / current;
+			} else {
+				result = previous / current;
+			}
+
+			// console.log("Works");
+			// here we make sure that the user gets an Error if they try to didvide a number by 0, but not break the code
 			break;
 		case "*":
 			result = previous * current;
 			break;
 		case "%":
-			console.log(previous, current);
 			result = previous / 100;
-			// console.log(result);
 			break;
 		default:
 			return;
@@ -89,6 +98,7 @@ const updateDisplay = () => {
 // Looping over all number buttons and adding an event listener to each one of them
 numberButtons.forEach((button) => {
 	button.addEventListener("click", () => {
+		console.log(button.textContent);
 		appendNumber(button.textContent); //selecting the number in the button
 		updateDisplay(); // displaying the chosen number on the screen
 	});

@@ -35,7 +35,7 @@ const chooseOperation = (operation_parameter) => {
 		//if there is a previous value (displayed up on the screen)  and we have a current value (down on the screen), we compute the numbers. This allows the aggregation of computations
 		operate();
 	}
-	operation = operation_parameter; // here we set the this.peration to the operation passed in from the textContent of the operationButton, so the calculator knows which operation to use
+	operation = operation_parameter; // here we set the operation to the operation passed in from the textContent of the operationButton, so the calculator knows which operation to use
 	previousValue = currentValue; //here we set the previousValue to the currentValue. So, once the user finishes typing a number, that number is set as a previousValue and gets moved up on the display, so as to allow for operation or a new value to be typed in
 	currentValue = ""; // here we set the current value to empty to allow the user type in a new value (either an operator or a new number input)
 };

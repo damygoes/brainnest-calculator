@@ -25,8 +25,7 @@ const deleteInput = () => {
 //the appendNumber function takes in a number as a paramater (this is supplied by the button.textContent from the numberButtons) and displays it on the screen
 const appendNumber = (number) => {
 	if (number === "." && currentValue.includes(".")) return; //here we make sure the user can only type the "." operator only once.
-	if (number === "0" && currentValue === "0") return;
-
+	if (number === "0" && currentValue === "0") return; //here we make sure the user can only type the "." operator only once.
 	currentValue = currentValue.toString() + number.toString(); //we set the current value (current user input) to string because we want to be able to concatenate all the numbers that the user types in and not treat them as numbers (which might add them up or just allow single number input)
 };
 
@@ -37,21 +36,20 @@ const chooseOperation = (operation_parameter) => {
 		//if there is a previous value (displayed up on the screen)  and we have a current value (down on the screen), we compute the numbers. This allows the aggregation of computations
 		operate();
 	}
-	operation = operation_parameter; // here we set the operation to the operation passed in from the textContent of the operationButton, so the calculator knows which operation to use
+	operation = operation_parameter; // here we set the this.peration to the operation passed in from the textContent of the operationButton, so the calculator knows which operation to use
 	previousValue = currentValue; //here we set the previousValue to the currentValue. So, once the user finishes typing a number, that number is set as a previousValue and gets moved up on the display, so as to allow for operation or a new value to be typed in
 	currentValue = ""; // here we set the current value to empty to allow the user type in a new value (either an operator or a new number input)
 };
 
 // the operate function performs the actual mathematical computations
 const operate = () => {
-	let result;
-	let previous = parseFloat(previousValue);
-	let current = currentValue;
-
-	// const current = currentValue; //the current value inputted by the user (the one on the bottom of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
+	let result; //create a variable to store the result of our computation
+	const previous = parseFloat(previousValue); //the previous value inputted by the user (the one on top of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
+	const current = parseFloat(currentValue);
+	// console.log(previous, current, operation); //the current value inputted by the user (the one on the bottom of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
 	// console.log(`previous: ${previous}`, `current: ${current}`);
+	if (isNaN(previous) || (isNaN(current) && operation != "%")) return; //if the user does not enter a previous value, or a current value, the code/calculator will not run. However, if the user enters a previous value and no current value but the operation symbol is "%", the code will run.
 
-	if (!previous || (!current && operation != "%")) return; //if the user does not enter a previous value, or a current value, the code/calculator will not run. However, if the user enters a previous value and no current value but the operation symbol is "%", the code will run.
 	switch (operation) {
 		case "+":
 			result = previous + current;
@@ -61,19 +59,11 @@ const operate = () => {
 			break;
 		case "/":
 			if (current == 0) {
-				result = "Error!";
-				currentValue = result;
-				console.log(currentValue);
-				previousValue = "";
-				updateDisplay();
-
+				clear();
+				currentValue = "Error!";
 				return;
-			} else {
-				result = previous / current;
-			}
-
-			// console.log("Works");
-			// here we make sure that the user gets an Error if they try to didvide a number by 0, but not break the code
+			} // here we make sure that the user gets an Error if they try to didvide a number by 0, but not break the code
+			result = previous / current;
 			break;
 		case "*":
 			result = previous * current;
@@ -84,7 +74,7 @@ const operate = () => {
 		default:
 			return;
 	}
-	currentValue = Math.round(result * 100) / 100; //here we set the current value (to be displayed at the bottom of the screen) to the result of the computation fixed to 2 decimal point
+	currentValue = Math.round(result * 100) / 100; //here we set the current value (to be displayed at the bottom of the screen) to the result of the computation
 	operation = undefined; // here we set operation to undefined
 	previousValue = ""; // here we set the previous value (the one on top of the display) to empty
 };
@@ -98,7 +88,6 @@ const updateDisplay = () => {
 // Looping over all number buttons and adding an event listener to each one of them
 numberButtons.forEach((button) => {
 	button.addEventListener("click", () => {
-		console.log(button.textContent);
 		appendNumber(button.textContent); //selecting the number in the button
 		updateDisplay(); // displaying the chosen number on the screen
 	});

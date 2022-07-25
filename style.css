@@ -23,7 +23,7 @@ body {
 }
 
 .calculator {
-	height: 80%;
+	height: 50vh;
 	width: auto;
 	padding: 1.2rem;
 	border-radius: 10px;
@@ -40,7 +40,7 @@ body {
 	max-width: 300px;
 	font-size: 2rem;
 	padding: 0.5rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 3.5rem;
 	overflow-y: scroll;
 	word-break: break-all;
 	word-wrap: break-word;
@@ -100,4 +100,90 @@ button#equal {
 .calculator button.btn-equal {
 	background-color: #adf9e7;
 	color: #000;
+}
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1280px) {
+	.calculator {
+		height: 80vh;
+	}
+	#display {
+		margin-bottom: 2rem;
+	}
+}
+@media screen and (max-width: 1050px) {
+	.calculator {
+		height: 50vh;
+	}
+}
+@media screen and (max-width: 1024px) {
+	.calculator {
+		height: 90vh;
+	}
+	#display {
+		margin-bottom: 2rem;
+	}
+	button {
+		height: 3rem;
+		width: 3rem;
+	}
+	button#equal {
+		width: 6.7rem;
+	}
+}
+@media screen and (max-width: 850px) {
+	.calculator {
+		height: 60vh;
+	}
+	#display {
+		margin-bottom: 1.5rem;
+	}
+}
+@media screen and (max-width: 540px) {
+	.calculator {
+		height: 90vh;
+	}
+	#display {
+		margin-bottom: 2.5rem;
+	}
+}
+@media screen and (max-width: 450px) {
+	.calculator {
+		max-height: 90vh;
+	}
+	#display {
+		margin-bottom: 1.2rem;
+	}
+}
+@media screen and (max-width: 415px) {
+	.calculator {
+		max-height: 70vh;
+	}
+	#display {
+		margin-bottom: 1.5rem;
+	}
+}
+@media screen and (max-width: 360px) {
+	.calculator {
+		max-height: 80vh;
+	}
+	#display {
+		margin-bottom: 1.2rem;
+	}
+}
+@media screen and (max-width: 280px) {
+	.calculator {
+		max-height: 80vh;
+		padding: 1rem;
+	}
+	#display {
+		margin-bottom: 2.5rem;
+	}
+	button {
+		height: 3rem;
+		width: 3rem;
+	}
+	button#equal {
+		width: 6.7rem;
+	}
 }

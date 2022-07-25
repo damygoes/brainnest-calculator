@@ -19,13 +19,13 @@ const clear = () => {
 };
 //the delete method removes the last number or digit of the input number when a user presses on DEL
 const deleteInput = () => {
-	currentValue = currentValue.toString().slice(0, -1); //here we select the current input of the user (the one on the bottom of the screen), convert it to string and call the "slice" method on it. This will allows us to remove the last value of the string. We go from index 0 to the second to the last number (index -1) and save them into the "this.currentValue" thereby chopping off the last digit
+	currentValue = currentValue.toString().slice(0, -1); //here we select the current input of the user (the one on the bottom of the screen), convert it to string and call the "slice" method on it. This will allows us to remove the last value of the string. We go from index 0 to the second to the last number (index -1) and save them into the variable - currentValue thereby chopping off the last digit
 };
 
 //the appendNumber function takes in a number as a paramater (this is supplied by the button.textContent from the numberButtons) and displays it on the screen
 const appendNumber = (number) => {
 	if (number === "." && currentValue.includes(".")) return; //here we make sure the user can only type the "." operator only once.
-	if (number === "0" && currentValue === "0") return; //here we make sure the user can only type the "." operator only once.
+	if (number === "0" && currentValue === "0") return; //here we make sure the user can only type the button 0 only once if there is no number on the screen before.
 	currentValue = currentValue.toString() + number.toString(); //we set the current value (current user input) to string because we want to be able to concatenate all the numbers that the user types in and not treat them as numbers (which might add them up or just allow single number input)
 };
 
@@ -36,7 +36,7 @@ const chooseOperation = (operation_parameter) => {
 		//if there is a previous value (displayed up on the screen)  and we have a current value (down on the screen), we compute the numbers. This allows the aggregation of computations
 		operate();
 	}
-	operation = operation_parameter; // here we set the this.peration to the operation passed in from the textContent of the operationButton, so the calculator knows which operation to use
+	operation = operation_parameter; // here we set the operation to the operation passed in from the textContent of the operationButton, so the calculator knows which operation to use
 	previousValue = currentValue; //here we set the previousValue to the currentValue. So, once the user finishes typing a number, that number is set as a previousValue and gets moved up on the display, so as to allow for operation or a new value to be typed in
 	currentValue = ""; // here we set the current value to empty to allow the user type in a new value (either an operator or a new number input)
 };
@@ -47,7 +47,6 @@ const operate = () => {
 	const previous = parseFloat(previousValue); //the previous value inputted by the user (the one on top of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
 	const current = parseFloat(currentValue);
 	// console.log(previous, current, operation); //the current value inputted by the user (the one on the bottom of the dsiplay - which was converted to string earlier to allow concatenation). We convert this to number using parseFloat, so we can do calculations on it
-	// console.log(`previous: ${previous}`, `current: ${current}`);
 	if (isNaN(previous) || (isNaN(current) && operation != "%")) return; //if the user does not enter a previous value, or a current value, the code/calculator will not run. However, if the user enters a previous value and no current value but the operation symbol is "%", the code will run.
 
 	switch (operation) {
@@ -130,7 +129,6 @@ document.addEventListener("keydown", (e) => {
 	clearAll = "Escape";
 	for (let i = 0; i < numbersArray.length; i++) {
 		if (e.key === numbersArray[i]) {
-			// console.log(e.key);
 			let number = e.key;
 			appendNumber(number);
 			updateDisplay();
@@ -138,7 +136,6 @@ document.addEventListener("keydown", (e) => {
 	}
 	for (let i = 0; i < operationParametersArray.length; i++) {
 		if (e.key === operationParametersArray[i]) {
-			// console.log(e.key);
 			let number = e.key;
 			let operation_parameter = e.key;
 			appendNumber(number);
